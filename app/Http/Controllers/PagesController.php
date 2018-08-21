@@ -24,10 +24,6 @@ class PagesController extends Controller
     	*/
     }
 
-    public function contact(){
-    	return view('contactos');
-    }
-
     public function saludo($nombre = 'Invitado'){
     	$script = "<script>alert('Problemas XSS - Cross Site Scripting!')</script>";
 		$consolas = [
@@ -37,33 +33,6 @@ class PagesController extends Controller
 			'PS Vita'
 		];
 		return view('saludo', compact('nombre', 'script', 'consolas'));
-    }
-
-    public function mensajes(CreateMessageRequest $request){
-    	
-    	/*
-    	$this->validate($request, [
-    		'nombre' => 'required',
-    		'email' => 'email|required',
-    		'mensaje' => 'required|min:5|max:15'
-    	]);*/
-    	
-    	//return $request->all();
-    	 /*
-    	if($request->has('nombre') && !empty($request->input('nombre'))){
-    		return 'Tiene nombre es: '.$request->input('nombre');
-    	} else {
-    		return 'No tiene nombre';
-    	}
-    	*/
-    	
-    	/*
-    	return redirect()
-    		->route('contactos')
-    		->with('info', 'Tu mensaje ha sido enviado correctamente :)');
-		*/
-
-    	return back()->with('info', 'El mensaje se envio correctamente :)');
     }
 }
  

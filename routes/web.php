@@ -12,12 +12,35 @@
 */
 	
 Route::get('/',['as' => 'home', 'uses' => 'PagesController@home']);//->middleware('example');
-Route::get('Hello', ['as' => 'contactos', 'uses' => 'PagesController@contact']);
+Route::get('home',function(){return view('home'); });//->middleware('example');
+
 Route::get('saludos/{nombre?}', ['as' => 'saludos', 'uses' => 'PagesController@saludo'])->where('nombre', "[A-Za-z]+");
 
-//Route::post('contacto', 'PagesController@mensajes');
-
 Route::resource('mensajes','MessagesController');
+
+//Login
+Route::get('test',function(){
+	$user = new App\User;
+
+	$user->name = 'Angel';
+	$user->email = "angel@gmail.com";
+	$user->password = bcrypt('123456');
+
+	$user->save();
+
+	return $user;
+
+});
+/*
+Route::get('login', 'Auth\LoginController@showLoginForm');
+Route::post('login', 'Auth\LoginController@login');
+*/
+Route::get('logout', 'Auth\LoginController@logout');
+Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');
+
+
 /*
 Route::get('mensaje',['as' => 'messages.index', 'uses' => 'MessagesController@index'] );
 Route::get('mensaje/create',['as' => 'messages.create', 'uses' => 'MessagesController@create'] );
